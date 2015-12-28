@@ -3,9 +3,10 @@
 This example creates a custom RabbitMQ container with a preconfigured vhost (example-vhost), exchange (example-exchange), and queue (example-queue) with appropriate bindings therein.
 
 We have two docker containers in this example:
-1. repo/rabbitmq-example-server
+
+1 repo/rabbitmq-example-server
   * This is the server we want, pre-configured with vhost, exchange, and queue.
-2. repo/rabbitmq-example-client
+2 repo/rabbitmq-example-client
   * This is another instance of rabbitmq "linked" to the above server container so that we can run the rabbit command line interfaces (cli's) against the server.
 
 ## Background Story
