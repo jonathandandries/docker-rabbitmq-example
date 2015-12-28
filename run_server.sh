@@ -31,7 +31,7 @@ if [ $? -eq 1 ]; then
   docker run -d \
     --hostname $CONTAINER \
     --name $CONTAINER \
-    -p 8080:15672 \
+    -p 15672:15672 \
     -e RABBITMQ_ERLANG_COOKIE='example secret' \
     ${IMAGE}:${TAG}
 fi

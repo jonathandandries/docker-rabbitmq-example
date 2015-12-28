@@ -21,8 +21,15 @@ I figured out the above through trial-and-error and many Google searches. I hope
 
 ```bash
 ./build_server.sh
-./run_server.sh
+./run_server.sh [debug]
 ```
+The management console should be running on port 15672. The base URL differs depending on your environment:
+
+* If you are running docker natively, you can access the management console from here: [http://localhost:15672/](http://localhost:15672/)
+* If you are running in docker-machine, and you are using "default" as the machine name, you can use the following command to show the URL for the management console:
+
+   ```echo "http://$(docker-machine ip default):15672/"```
+   
 
 ## Client usage
 
