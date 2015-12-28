@@ -34,5 +34,5 @@ I figured out the above through trial-and-error and many Google searches. I hope
 Export the current configuration of the rabbitmq-example-server:
 
 ```bash
-rabbitmqadmin --host rabbitmq-example-server --username admin --password nimda list export rabbitmq.config
+rabbitmqadmin --host rabbitmq-example-server --username admin --password nimda export rabbitmq.config
 ```
