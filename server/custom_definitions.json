@@ -6,9 +6,9 @@
             "tags": "administrator"
         }],
     "vhosts": [{
-            "name": "example-vhost"
-        }, {
             "name": "/"
+        }, {
+            "name": "example-vhost"
         }],
     "permissions": [{
             "user": "admin",
