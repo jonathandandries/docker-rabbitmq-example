@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 if [[ debug != "$1" ]]; then
   echo () { :; }
   shift

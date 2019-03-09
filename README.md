@@ -2,14 +2,14 @@
 
 As is, this project creates a custom docker container for RabbitMQ with a preconfigured vhost (example-vhost), exchange (example-exchange), and queue (example-queue) with appropriate bindings therein.
 
-You can use this project to create your own pre-configured RabbitMQ image and container that you setup either by 
+You can use this project to create your own pre-configured RabbitMQ image and container that you setup either by
 
-1. directly modifying the included custom_definitions.json configuration file with a text editor, or by 
+1. directly modifying the included custom_definitions.json configuration file with a text editor, or by
 2. (**recommended**) using the RabbitMQ management interface to create the vhosts, exchanges, queues, and bindings that you want, and then exporting the resulting configuration to overright the included custom_definitions.json file.
 
 The following instructions explain how to run the RabbitMQ server container, modify the included custom configuration using your web browser in the RabbitMQ management interface, and then export the resulting configuration to include your changes in a new custom RabbitMQ server image and container.
 
-## Getting Started ##
+## Getting Started
 
 We have two docker containers in this example:
 
@@ -43,6 +43,10 @@ CONTAINER ID        IMAGE                                 COMMAND               
 Use the management interface with your web browser to setup RabbitMQ for your environment.
 
 If the server container is running, you should be able to reach the RabbitMQ management interface in your web browser on localhost as follows: [http://localhost:15672/]().
+
+* Username: `admin`
+* Password: `nimda`
+
 > Note, however, that if you are using **docker-machine** instead of running docker natively, you will need to know the ip address of the running machine vm (instead of localhost). Most people run a docker-machine named 'default', and can therefore get the IP as follows:
 >  ```docker-machine ip default```
 > On my computer, this resolved to 192.168.99.100, which means I would access the RabbitMQ management interface with the following address: [http://192.168.99.100:15672/]()
@@ -102,15 +106,6 @@ You can rebuild and re-run the server container (see step #1 above) and then con
 
 Make any edits you like to run_server.sh and server/Dockerfile to reflect your organization. You might also want to publish your resulting server image on DockerHub and/or in a private Docker repository.
 
-## Background Story
-
-I couldn't make a custom rabbitmq image work with preconfigured vhost/exchange/queue just by following the steps on the blog post here: [Creating a custom RabbitMQ container with preconfigured queues](http://devops.datenkollektiv.de/creating-a-custom-rabbitmq-container-with-preconfigured-queues.html). That post had two problems:
-
-1. In **rabbitmq.config**, they put quotes around the labels (e.g., "load_definitions", vs load_definitions,) and that didn't work,
-2. I was trying to run the custom container with "docker run" paremters such as "-e RABBITMQ_DEFAULT_USER=admin", but specifying that parameter generates a new rabbitmq.config that overwrites the one I was trying to put in place. I suspect this is a feature/bug of the underlying rabbitmq image implementation.
-
-I figured out the above through trial-and-error and many Google searches. I hope this example helps save you time improving on my attempts.
-
 ## Server usage
 
 ```bash
@@ -136,3 +131,29 @@ Export the current configuration of the rabbitmq-example-server:
 ```bash
 rabbitmqadmin --host rabbitmq-example-server --username admin --password nimda export custom_definitions.json
 ```
+
+## Contributing
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request.
+
+## History
+
+1. January 3, 2016 -- initial version.
+2. March 9, 2019 -- cleanup README, add shebang, other consmetic stuff.
+
+## Background Story
+
+I couldn't make a custom rabbitmq image work with preconfigured vhost/exchange/queue just by following the steps on the blog post here: [Creating a custom RabbitMQ container with preconfigured queues](http://devops.datenkollektiv.de/creating-a-custom-rabbitmq-container-with-preconfigured-queues.html). That post had two problems:
+
+1. In **rabbitmq.config**, they put quotes around the labels (e.g., "load_definitions", vs load_definitions,) and that didn't work,
+2. I was trying to run the custom container with "docker run" paremters such as "-e RABBITMQ_DEFAULT_USER=admin", but specifying that parameter generates a new rabbitmq.config that overwrites the one I was trying to put in place. I suspect this is a feature/bug of the underlying rabbitmq image implementation.
+
+I figured out the above through trial-and-error and many Google searches. I hope this example helps save you time improving on my attempts.
+
+## License
+
+Gratis and libre.

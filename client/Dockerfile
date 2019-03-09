@@ -1,6 +1,6 @@
 FROM rabbitmq:3.5.7
 
-MAINTAINER Jonathan D'Andries
+MAINTAINER "Jonathan D'Andries"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		python \
