@@ -1,6 +1,6 @@
 FROM rabbitmq:3.8.3-management
 
-MAINTAINER "Thomas Mildner"
+MAINTAINER "Jonathan D'Andries"
 
 COPY rabbitmq.conf /etc/rabbitmq/
 COPY custom_definitions.json /etc/rabbitmq/

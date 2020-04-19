@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-docker build -t rabbitmq-rest-exercise server/.
+docker build -t repo/rabbitmq-example-server server/.
