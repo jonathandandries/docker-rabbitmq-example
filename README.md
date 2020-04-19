@@ -16,6 +16,13 @@ Start Docker Container from Image
 docker run -d --name rabbitmq-rest-exercise -p 15672:15672 vvthromildner/vvss20_rabbitmq
 ```
 
+Now you can access your RabbitMQ Management UI via:
+http://localhost:15672 
+
+The Credentials are:
+> User: guest
+> Pass: guest
+
 ## Option 2: Build Container yourself
 
 Clone Git Repository
