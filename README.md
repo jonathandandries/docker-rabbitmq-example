@@ -13,7 +13,7 @@ docker pull vvthromildner/vvss20_rabbitmq
 Start Docker Container from Image
 
 ```bash
-docker run -d --name rabbitmq-rest-exercise -p 15672:15672 -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest vvthromildner/vvss20_rabbitmq
+docker run -d --name rabbitmq-rest-exercise -p 15672:15672 vvthromildner/vvss20_rabbitmq
 ```
 
 ## Option 2: Build Container yourself
