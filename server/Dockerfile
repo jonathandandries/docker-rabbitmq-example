@@ -1,8 +1,8 @@
-FROM rabbitmq:3.5.7-management
+FROM rabbitmq:3.8.3-management
 
 MAINTAINER "Thomas Mildner"
 
-COPY rabbitmq.config /etc/rabbitmq/
+COPY rabbitmq.conf /etc/rabbitmq/
 COPY custom_definitions.json /etc/rabbitmq/
 
 CMD ["rabbitmq-server"]
