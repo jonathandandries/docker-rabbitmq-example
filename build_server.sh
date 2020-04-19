@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-docker build -t vvss20-rabbitmq-server server/.
+docker build -t rabbitmq-rest-exercise server/.

@@ -4,9 +4,9 @@ if [[ debug != "$1" ]]; then
   shift
 fi
 
-IMAGE="vvss20-rabbitmq-server"
+IMAGE="rabbitmq-rest-exercise"
 TAG="latest"
-CONTAINER="vvss20-rabbitmq-server"
+CONTAINER="rabbitmq-rest-exercise"
 
 #############################################
 # 
