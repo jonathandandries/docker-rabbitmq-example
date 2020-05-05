@@ -2,8 +2,10 @@ FROM rabbitmq:3.8.3
 
 MAINTAINER "Jonathan D'Andries"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN mkdir -p /etc/bash_completion.d/ \
+	&& apt-get update && apt-get install -y --no-install-recommends \
 		python \
+		bash-completion \
 	&& rm -rf /var/lib/apt/lists/*
 
 # The following file was downloaded from the running instance
@@ -12,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # e.g., http://192.168.99.100:15672/cli/rabbitmqadmin
 COPY rabbitmqadmin /usr/local/bin/rabbitmqadmin
 
+ENV HOME /root
 # Calling "; sync" in the following command because we get the following
 # error without it:
 #     /bin/sh: 1: rabbitmqadmin: Text file busy
