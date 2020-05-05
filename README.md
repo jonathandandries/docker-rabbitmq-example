@@ -53,7 +53,9 @@ If the server container is running, you should be able to reach the RabbitMQ man
 
 #### Step-3:
 
-Once you are happy with the configuration in RabbitMQ, you can use the included client Docker container to export the new configuration.
+Once you are happy with the configuration in RabbitMQ, you can use the ```Export defnitions``` feature in the management console to download the json configuration and save that file to overwrite ```server/custom_defitions.json``` locally. 
+
+Alternatively, since this is a tutorial, you can use the included client Docker container to export the new configuration.
 
 Build and run the RabbitMQ client container:
 
@@ -80,11 +82,11 @@ cat custom_definitions.json
 The results are not formatted nicely (all on one line), and they look something like this:
 
 ```json
-{"rabbit_version":"3.5.7","users":[{"name":"admin","password_hash":"b/XedHeZ8AVWttrmlrs5Mjl+eKI=","tags":"administrator"}],"vhosts":[{"name":"/"},{"name":"example-vhost"}],"permissions":[{"user":"admin","vhost":"/","configure":".*","write":".*","read":".*"},{"user":"admin","vhost":"example-vhost","configure":".*","write":".*","read":".*"}],"parameters":[],"policies":[],"queues":[{"name":"example-queue","vhost":"example-vhost","durable":true,"auto_delete":false,"arguments":{"x-max-length":5}}],"exchanges":[{"name":"example-exchange","vhost":"example-vhost","type":"fanout","durable":true,"auto_delete":false,"internal":false,"arguments":{}}],"bindings":[{"source":"example-exchange","vhost":"example-vhost","destination":"example-queue","destination_type":"queue","routing_key":"","arguments":{}}]}
+{"rabbit_version":"3.8.3","rabbitmq_version":"3.8.3","users":[{"name":"admin","password_hash":"ZZiLrBJwnZi5WvlJdwoOHFEVfHWE4KIqSvtBc5whwcXQCaiL","hashing_algorithm":"rabbit_password_hashing_sha256","tags":"administrator"}],"vhosts":[{"name":"/"},{"name":"example-vhost"}],"permissions":[{"user":"admin","vhost":"/","configure":".*","write":".*","read":".*"},{"user":"admin","vhost":"example-vhost","configure":".*","write":".*","read":".*"}],"topic_permissions":[{"user":"admin","vhost":"example-vhost","exchange":"","write":".*","read":".*"}],"parameters":[],"global_parameters":[{"name":"cluster_name","value":"rabbit@rabbitmq-example-server"},{"name":"internal_cluster_id","value":"rabbitmq-cluster-id-uiQY72El-t7KshK33EgSmA"}],"policies":[],"queues":[{"name":"example-queue","vhost":"example-vhost","durable":true,"auto_delete":false,"arguments":{"x-max-length":5,"x-queue-type":"classic"}}],"exchanges":[{"name":"example-exchange","vhost":"example-vhost","type":"fanout","durable":true,"auto_delete":false,"internal":false,"arguments":{}}],"bindings":[{"source":"example-exchange","vhost":"example-vhost","destination":"example-queue","destination_type":"queue","routing_key":"","arguments":{}}]}
 ```
 
 You can use the above output to overright the included file in server/custom_definitions.json. 
-> You might also want to use a nice json editor like Netbeans to format the output before pasting into server/custom_definitions.json
+> You might also want to use a nice json editor like Visual Studio Code to format the output before pasting into server/custom_definitions.json
 
 Exit the client container:
 
@@ -104,7 +106,7 @@ You can rebuild and re-run the server container (see step #1 above) and then con
 
 #### Step-6:
 
-Make any edits you like to run_server.sh and server/Dockerfile to reflect your organization. You might also want to publish your resulting server image on DockerHub and/or in a private Docker repository.
+Make any edits you like to ```run_server.sh``` and ```server/Dockerfile``` to reflect your organization. You might also want to publish your resulting server image on DockerHub and/or in a private Docker repository.
 
 ## Server usage
 
@@ -144,13 +146,14 @@ rabbitmqadmin --host rabbitmq-example-server --username admin --password nimda e
 
 1. January 3, 2016 -- initial version.
 2. March 9, 2019 -- cleanup README, add shebang, other consmetic stuff.
+3. May 4, 2020 -- updated to v3.8.3 of RabbitMQ
 
 ## Background Story
 
 I couldn't make a custom rabbitmq image work with preconfigured vhost/exchange/queue just by following the steps on the blog post here: [Creating a custom RabbitMQ container with preconfigured queues](http://devops.datenkollektiv.de/creating-a-custom-rabbitmq-container-with-preconfigured-queues.html). That post had two problems:
 
 1. In **rabbitmq.config**, they put quotes around the labels (e.g., "load_definitions", vs load_definitions,) and that didn't work,
-2. I was trying to run the custom container with "docker run" paremters such as "-e RABBITMQ_DEFAULT_USER=admin", but specifying that parameter generates a new rabbitmq.config that overwrites the one I was trying to put in place. I suspect this is a feature/bug of the underlying rabbitmq image implementation.
+2. I was trying to run the custom container with "docker run" parameters such as "-e RABBITMQ_DEFAULT_USER=admin", but specifying that parameter generates a new rabbitmq.config that overwrites the one I was trying to put in place. I suspect this is a feature/bug of the underlying rabbitmq image implementation.
 
 I figured out the above through trial-and-error and many Google searches. I hope this example helps save you time improving on my attempts.
 
